@@ -2,3 +2,13 @@
 [2025-06-13 03:44:02] remove_customer 
 [2025-06-14 03:19:07] remove_book 
 [2025-06-14 03:19:16] purchase_book 
+[2025-06-14 12:21:23] add_book 
+[2025-06-14 12:21:29] add_customer 
+[2025-06-14 12:21:36] purchase_book 
+[2025-06-14 12:49:22] add_book 
+[2025-06-14 12:49:28] remove_book 
+[2025-06-14 12:49:35] add_customer 
+[2025-06-14 12:49:39] remove_customer 
+[2025-06-14 12:49:45] purchase_book 
+[2025-06-24 20:51:19] add_book 
+[2025-06-24 20:51:25] purchase_book 

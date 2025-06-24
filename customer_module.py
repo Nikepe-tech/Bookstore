@@ -8,25 +8,44 @@ from random import randint
 
 customers = []
 
+
 def load_customers():
-    """Wczytuje klientów z pliku customers.csv do listy."""
+    """
+    Wczytuje klientów z pliku customers.csv do globalnej listy customers.
+
+    Returns:
+        None
+    """
+
     global customers
     customers = []
     if not os.path.exists("customers.csv"):
         return
-    with open("customers.csv", mode="r", encoding="utf-8") as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            customers.append(row["name"])
+    try:
+        with open("customers.csv", mode="r", encoding="utf-8") as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                customers.append(row["name"])
+    except FileNotFoundError:
+        customers = []
+
 
 def add_customer(name):
-    """Dodaje klienta do customers.csv (jeśli nie istnieje)."""
+    """
+    Dodaje klienta do pliku customers.csv, jeśli nie istnieje.
+
+    Args:
+        name (str): Imię i nazwisko klienta.
+
+    Returns:
+        bool: True jeśli dodano nowego klienta, False jeśli klient już istnieje.
+    """
+
     if not os.path.exists("customers.csv"):
         with open("customers.csv", mode="w", newline='', encoding="utf-8") as file:
             writer = csv.writer(file)
             writer.writerow(["id", "name"])
 
-    # Sprawdź, czy klient już istnieje
     with open("customers.csv", mode="r", encoding="utf-8") as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -41,21 +60,34 @@ def add_customer(name):
 
     return True
 
+
 def remove_customer(name):
-    """Usuwa klienta po imieniu z customers.csv."""
+    """
+    Usuwa klienta z pliku customers.csv na podstawie imienia.
+
+    Args:
+        name (str): Imię klienta do usunięcia.
+
+    Returns:
+        bool: True, jeśli klient został usunięty. False, jeśli nie znaleziono.
+    """
+
     if not os.path.exists("customers.csv"):
         return False
 
     updated = []
     removed = False
 
-    with open("customers.csv", mode="r", encoding="utf-8") as file:
-        reader = csv.DictReader(file)
-        for row in reader:
-            if row["name"] != name:
-                updated.append(row)
-            else:
-                removed = True
+    try:
+        with open("customers.csv", mode="r", encoding="utf-8") as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                if row["name"] != name:
+                    updated.append(row)
+                else:
+                    removed = True
+    except FileNotFoundError:
+        return False
 
     if removed:
         with open("customers.csv", mode="w", newline='', encoding="utf-8") as file:

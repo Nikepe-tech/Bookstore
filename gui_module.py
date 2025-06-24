@@ -13,8 +13,13 @@ import purchase_module
 
 def log_action(func):
     """
-    Dekorator logujący wywołanie funkcji do pliku actions.log
-    wraz z datą i godziną.
+    Dekorator zapisujący akcję do pliku logów z timestampem.
+
+    Args:
+        func (function): Funkcja, którą dekorujemy.
+
+    Returns:
+        function: Opakowana funkcja z logowaniem.
     """
 
     def wrapper(*args, **kwargs):
@@ -64,7 +69,15 @@ def run_gui():
 
     @log_action
     def add_book():
-        """Dodaje nową książkę do pliku books.csv oraz do interfejsu."""
+        """
+        Dodaje nową książkę do listy i pliku CSV.
+
+        Pobiera dane z pól tekstowych, wywołuje funkcję add_book() z book_module,
+        a następnie aktualizuje Listbox.
+
+        Returns:
+            None
+        """
 
         title = title_entry.get().strip()
         author = author_entry.get().strip()
@@ -83,8 +96,14 @@ def run_gui():
     @log_action
     def remove_book():
         """
-        Usuwa wybraną książkę z listy i pliku books.csv.
-        Wymaga potwierdzenia użytkownika. Obsługuje wyjątki.
+        Usuwa zaznaczoną książkę z interfejsu i pliku books.csv.
+
+        Pobiera wybraną pozycję z listy, wyodrębnia ID,
+        pyta o potwierdzenie, a następnie wywołuje funkcję
+        remove_book_by_id() z book_module.
+
+        Returns:
+            None
         """
 
         selected_book = book_listbox.curselection()
@@ -133,8 +152,14 @@ def run_gui():
     @log_action
     def add_customer():
         """
-        Dodaje klienta do pliku customers.csv oraz do listy w GUI.
-        Sprawdza, czy klient już istnieje i czyści pole po dodaniu.
+        Dodaje nowego klienta na podstawie wpisanego imienia i nazwiska.
+
+        Sprawdza, czy pole nie jest puste, następnie wywołuje
+        add_customer() z customer_module. W razie powodzenia
+        dodaje klienta do listy GUI.
+
+        Returns:
+            None
         """
 
         name = name_entry.get().strip()
@@ -155,8 +180,13 @@ def run_gui():
     @log_action
     def remove_customer():
         """
-        Usuwa klienta z listy i z pliku customers.csv.
-        Wymaga potwierdzenia użytkownika. Wyświetla odpowiedni komunikat.
+        Usuwa wybranego klienta z listy i pliku customers.csv.
+
+        Pobiera imię klienta z Listboxa, pyta o potwierdzenie
+        i wywołuje remove_customer() z customer_module.
+
+        Returns:
+            None
         """
 
         selected_customer = customer_listbox.curselection()
@@ -182,7 +212,16 @@ def run_gui():
 
     @log_action
     def purchase_book():
-        """Realizuje zakup książki przez klienta i zapisuje dane w purchases.csv."""
+        """
+        Realizuje zakup książki przez wybranego klienta.
+
+        Sprawdza zaznaczenia w obu listach, odczytuje ID z plików,
+        a następnie wywołuje save_purchase() z purchase_module.
+        Pokazuje komunikat z potwierdzeniem.
+
+        Returns:
+            None
+        """
 
         selected_book = book_listbox.curselection()
         selected_customer = customer_listbox.curselection()
@@ -197,13 +236,16 @@ def run_gui():
         book_id = book_text.split("-")[0]
 
         customer_id = None
-        with open("customers.csv", "r", encoding="utf-8") as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                if row["name"] == customer_text:
-                    customer_id = row["id"]
-                    break
-
+        try:
+            with open("customers.csv", "r", encoding="utf-8") as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    if row["name"] == customer_text:
+                        customer_id = row["id"]
+                        break
+        except FileNotFoundError:
+            messagebox.showerror("Error", "Brakuje pliku customers.csv")
+            return
         if customer_id is None:
             messagebox.showerror("Error", "Nie ma klienta")
             return

@@ -1,53 +1,97 @@
-# Projekt Python – Księgarnia Internetowa / Python Project – Online Bookstore
+# 📚 Projekt – Księgarnia internetowa (Python GUI)
 
-## 🇵🇱 Wersja polska
+**ENGLISH BELOW ↓**
 
-Ten projekt został wykonany na zaliczenie z przedmiotu Python.
+---
 
-### Opis
+## 🇵🇱 Opis (Polski)
 
-Aplikacja to prosta księgarnia online z graficznym interfejsem użytkownika.  
-Można dodawać i usuwać książki oraz klientów, a także kupować książki.  
-Dane zapisywane są w plikach CSV.
+Aplikacja stworzona w ramach projektu zespołowego na zajęcia z języka Python.  
+Umożliwia zarządzanie e-bookami, klientami oraz realizację zakupów poprzez prosty interfejs graficzny.
 
-### Moduły
+---
 
-- gui_module.py – główny interfejs
-- main.py – uruchamia program
-- book_module.py – obsługa książek
-- customer_module.py – obsługa klientów
-- purchase_module.py – zapis zakupów
+### 👨‍💻 Autorzy
 
-### Pliki danych
+- **Mikita Kryvenia** – GUI (Tkinter), integracja modułów, obsługa zakupów, dekoratory, dokumentacja, obsługa wyjątków, system logów  
+- **Jakub Kadaj** – logika i moduł obsługi książek (`book_module.py`)  
+- **Paweł Zarzecki** – logika i moduł obsługi klientów (`customer_module.py`)
 
-- books.csv – lista książek
-- customers.csv – lista klientów
-- purchases.csv – lista zakupów
+---
+
+### 🧩 Struktura projektu
+
+bookstore_project/
+├── main.py             # Uruchamia program
+├── gui_module.py       # Interfejs graficzny
+├── book_module.py      # Obsługa książek
+├── customer_module.py  # Obsługa klientów
+├── purchase_module.py  # Obsługa zakupów
+│
+├── books.csv           # Baza książek
+├── customers.csv       # Baza klientów
+├── purchases.csv       # Historia zakupów
+├── actions.log         # Dziennik działań
+├── README.md           # Ten plik
+
 
 
 ---
 
-## 🇬🇧 English version
+### ▶️ Jak uruchomić
 
-This project was created for a university Python course.
+1. Zainstaluj Pythona (3.11+)
+2. Pobierz projekt lub sklonuj repozytorium
+3. Uruchom:
 
-### Description
+```bash
+python main.py
+🇬🇧 Description (English)
+This application was created as a team project for Python programming classes.
+It allows you to manage e-books, customers, and purchases via a graphical user interface.
 
-The application is a simple online bookstore with a graphical interface.  
-It allows adding and removing books and customers, as well as purchasing books.  
-Data is saved to `.csv` files.
+👨‍💻 Authors
+Mikita Kryvenia – GUI (Tkinter), module integration, purchase logic, decorators, documentation, error handling, logging
 
-### Modules
+Jakub Kadaj – logic and book handling module (book_module.py)
 
-- gui_module.py – main GUI interface
-- main.py – launches the program
-- book_module.py – handles books
-- customer_module.py – handles customers
-- purchase_module.py – handles purchases
+Paweł Zarzecki – logic and customer handling module (customer_module.py)
 
-### Data files
+🧩 Project Structure
 
-- books.csv – list of books
-- customers.csv – list of customers
-- purchases.csv – purchase records
+bookstore_project/
+│
+├── main.py                # Starts the app
+├── gui_module.py          # GUI logic
+├── book_module.py         # Book handling
+├── customer_module.py     # Customer handling
+├── purchase_module.py     # Purchase system
+│
+├── books.csv              # Book database
+├── customers.csv          # Customer database
+├── purchases.csv          # Purchase records
+├── actions.log            # Action logs
+├── README.md              # This file
+▶️ How to run
+Install Python (3.11+)
+
+Download the ZIP or clone the repository
+
+Run the program:
+
+python main.py
+🔧 Technologies
+Python 3.11+
+
+Tkinter (GUI)
+
+CSV data handling
+
+Functional programming
+
+Decorators
+
+Exception handling
+
+Google-style docstrings (visible in IDE)
 
